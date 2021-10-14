@@ -36,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
 
         tools:text="@tools:sample/lorem/random"
-        tools:maxLines="15"
+        tools:maxLines="15"></TextView>
 
 
 
