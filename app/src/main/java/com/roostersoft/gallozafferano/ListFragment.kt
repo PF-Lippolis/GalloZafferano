@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.roostersoft.gallozafferano.adapter.RecipeAdapter
-import com.roostersoft.gallozafferano.databinding.FragmentDetailsBinding
 import com.roostersoft.gallozafferano.databinding.FragmentListBinding
 
 class ListFragment : Fragment() {
@@ -32,11 +32,13 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.recipes.observe(viewLifecycleOwner) {
+        viewModel.recipes.observe(viewLifecycleOwner) { list ->
             binding.listFragmentRecipesList.adapter = RecipeAdapter(
                 getString(R.string.welcome_back, args.name),
-                it,
-                {})
+                list) {
+                val action = ListFragmentDirections.actionListFragmentToDetailsFragment(it)
+                findNavController().navigate(action)
+            }
         }
     }
 
