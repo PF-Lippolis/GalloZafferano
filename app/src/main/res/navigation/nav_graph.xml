@@ -27,12 +27,12 @@
         android:name="com.roostersoft.gallozafferano.ListFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" >
-        <action
-            android:id="@+id/action_listFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
         <argument
             android:name="name"
             app:argType="string" />
+        <action
+            android:id="@+id/action_listFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
