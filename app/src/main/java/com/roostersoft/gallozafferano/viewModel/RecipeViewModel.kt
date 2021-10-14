@@ -1,4 +1,4 @@
-package com.roostersoft.gallozafferano
+package com.roostersoft.gallozafferano.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
