@@ -72,5 +72,6 @@ dependencies {
     //SafeArgs
     apply plugin: "androidx.navigation.safeargs.kotlin"
 
-
+    //SwipeRefreshLayout
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 }
