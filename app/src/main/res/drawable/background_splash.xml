@@ -4,7 +4,7 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/gallo_logo_large">
-        </bitmap>
+            android:src="@drawable/gallo_logo_large"
+        />
     </item>
 </layer-list>
