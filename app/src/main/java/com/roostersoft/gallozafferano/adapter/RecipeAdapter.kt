@@ -14,7 +14,7 @@ import com.roostersoft.gallozafferano.model.RecipeWithIdAndImage
 import retrofit2.http.Header
 import java.lang.IllegalStateException
 
-class RecipeAdapter(val title: String, val list: List<RecipeWithIdAndImage>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RecipeAdapter(val title: String, val list: List<RecipeWithIdAndImage>, val onClick: (RecipeWithIdAndImage)-> Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     class HeaderViewHolder(binding: HeaderBinding): RecyclerView.ViewHolder(binding.root) {
         val title: TextView
@@ -78,6 +78,10 @@ class RecipeAdapter(val title: String, val list: List<RecipeWithIdAndImage>): Re
                     .error(R.drawable.sad_face)
                     .centerCrop()
                     .into(holder.image)
+
+                holder.itemView.setOnClickListener {
+                    onClick.invoke(recipe)
+                }
             }
         }
     }
