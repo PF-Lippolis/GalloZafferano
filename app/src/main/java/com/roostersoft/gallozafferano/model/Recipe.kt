@@ -7,10 +7,16 @@ data class Recipe(val title: String, val body: String) {
 data class RecipeWithId(val _id: String, val title: String, val body: String)
 
 data class RecipeWithIdAndImage(val imageUrl: String, val _id: String, val title: String, val body: String){
-    constructor(recipe: RecipeWithId) : this(nextImg().first(), recipe._id, recipe.title, recipe.body)
+    constructor(recipe: RecipeWithId) : this(nextImg(), recipe._id, recipe.title, recipe.body)
 
     companion object {
-        private fun nextImg() = sequence {
+        private var i = 0
+
+        fun resetImagesCycle() {
+            i = 0
+        }
+
+        fun nextImg(): String {
             val urls = listOf(
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Foto.Linzertorte.JPG/800px-Foto.Linzertorte.JPG",
                 "https://upload.wikimedia.org/wikipedia/commons/6/67/Italiano_sandwich_01.jpg",
@@ -18,12 +24,9 @@ data class RecipeWithIdAndImage(val imageUrl: String, val _id: String, val title
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg",
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Pasta_Puttanesca.jpg/1024px-Pasta_Puttanesca.jpg"
             )
-
-            var i = 0
-            while (true) {
-                yield(urls[i])
-                i = (i + 1) % urls.size
-            }
+            val url = urls[i]
+            i = (i + 1) % urls.size
+            return url
         }
     }
 }
