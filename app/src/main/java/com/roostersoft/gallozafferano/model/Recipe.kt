@@ -1,12 +1,19 @@
 package com.roostersoft.gallozafferano.model
 
-data class Recipe(val title: String, val body: String) {
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class Recipe(val title: String, val body: String) : Parcelable {
     constructor(recipe: RecipeWithId) : this(recipe.title, recipe.body)
 }
 
-data class RecipeWithId(val _id: String, val title: String, val body: String)
+@Parcelize
+data class RecipeWithId(val _id: String, val title: String, val body: String) : Parcelable
 
-data class RecipeWithIdAndImage(val imageUrl: String, val _id: String, val title: String, val body: String){
+@Parcelize
+data class RecipeWithIdAndImage(val imageUrl: String, val _id: String, val title: String, val body: String) :
+    Parcelable {
     constructor(recipe: RecipeWithId) : this(nextImg(), recipe._id, recipe.title, recipe.body)
 
     companion object {
