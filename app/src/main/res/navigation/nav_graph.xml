@@ -38,5 +38,9 @@
         android:id="@+id/detailsFragment"
         android:name="com.roostersoft.gallozafferano.DetailsFragment"
         android:label="fragment_details"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details" >
+        <argument
+            android:name="recipe"
+            app:argType="com.roostersoft.gallozafferano.model.RecipeWithIdAndImage" />
+    </fragment>
 </navigation>
