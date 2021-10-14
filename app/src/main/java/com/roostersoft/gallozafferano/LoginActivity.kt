@@ -18,11 +18,11 @@ class LoginActivity : AppCompatActivity() {
 
     fun onButtonClick() {
         binding.buttonAccedi.setOnClickListener {
-            val utenti = mapOf("Francesco" to "1", "Alessandro" to "2", "Marco" to "3")
+            val utenti = mapOf("francesco@gmail.com" to ("Francesco" to "1"), "alessandro@gmail.com" to ("Alessandro" to "2"), "marco@gmail.com" to ("Marco" to "3"))
             val username = binding.username.text.toString()
-                if(utenti.containsKey(username) && utenti.get(username) == binding.password.text.toString()){
+                if(utenti.containsKey(username) && utenti.get(username)!!.second == binding.password.text.toString()){
                 val intent1 = Intent(this,MainActivity::class.java).apply {
-                putExtra("username_inserita", binding.username.text.toString())
+                putExtra("username_inserita", utenti.get(username)!!.first)
             }
                 startActivity(intent1)
                 }else{Toast.makeText(this,"Username o Password errati", Toast.LENGTH_LONG).show()
