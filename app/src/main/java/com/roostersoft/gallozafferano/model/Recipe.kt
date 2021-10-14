@@ -25,11 +25,14 @@ data class RecipeWithIdAndImage(val imageUrl: String, val _id: String, val title
 
         fun nextImg(): String {
             val urls = listOf(
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Foto.Linzertorte.JPG/800px-Foto.Linzertorte.JPG",
-                "https://upload.wikimedia.org/wikipedia/commons/6/67/Italiano_sandwich_01.jpg",
-                "https://upload.wikimedia.org/wikipedia/commons/d/d9/Max%27s_Roasted_Chicken_-_Evan_Swigart.jpg",
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg",
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Pasta_Puttanesca.jpg/1024px-Pasta_Puttanesca.jpg"
+                "https://www.informacibo.it/wp-content/uploads/2018/04/carbonara.jpg",
+                "http://cdn.cook.stbm.it/thumbnails/ricette/1/1259/hd750x421.jpg",
+                "https://www.ricetteperbimby.it/foto-ricette/risotto-alla-crema-di-scampi-bimby.jpg",
+                "https://primochef.it/wp-content/uploads/2019/03/SH_pollo_arrosto.jpg.webp",
+                "https://www.giallozafferano.it/images/184-18454/Filetto-al-pepe-verde_650x433_wm.jpg",
+                "https://www.unmondodisapori.it/wp-content/uploads/2017/10/margherita.jpg",
+                "https://blog.giallozafferano.it/ricottaegrano/wp-content/uploads/2019/05/millefoglie-ok2.jpg-1-di-1.jpg",
+                "https://cdn.robadadonne.it/wp-content/uploads/sites/4/2015/03/Sacher-1.jpg"
             )
             val url = urls[i]
             i = (i + 1) % urls.size
