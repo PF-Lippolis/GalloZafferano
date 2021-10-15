@@ -12,10 +12,14 @@
         tools:layout="@layout/fragment_waiting" >
         <action
             android:id="@+id/action_waitingFragment_to_errorFragment"
-            app:destination="@id/errorFragment" />
+            app:destination="@id/errorFragment"
+            app:popUpTo="@id/waitingFragment"
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_waitingFragment_to_listFragment"
-            app:destination="@id/listFragment" />
+            app:destination="@id/listFragment"
+            app:popUpTo="@id/waitingFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/errorFragment"
