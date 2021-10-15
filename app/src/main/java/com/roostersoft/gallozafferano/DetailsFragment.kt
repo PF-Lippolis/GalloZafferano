@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
@@ -28,7 +30,6 @@ class DetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
-        onClickButton()
         return binding.root
     }
 
@@ -71,6 +72,25 @@ class DetailsFragment : Fragment() {
             .error(R.drawable.sad_face)
             .centerCrop()
             .into(binding.recipeDetailsImage)
+
+        viewModel.modificationResponse.observe(viewLifecycleOwner) {
+            //If it is not null, a response was received.
+            it?.let {
+                //If the boolean is true, the request was successful, we navigate to the list
+                if (it.first) {
+                    Toast.makeText(activity, it.second, Toast.LENGTH_LONG).show()
+                    val action =
+                        DetailsFragmentDirections.actionDetailsFragmentToWaitingFragment()
+                    findNavController().navigate(action)
+                    viewModel.modificationResponse.postValue(null)
+                } else {
+                    //The boolean is false, we make the user remain on the screen in case they want to retry
+                    Toast.makeText(activity, it.second, Toast.LENGTH_LONG).show()
+                    viewModel.modificationResponse.postValue(null)
+                }
+            }
+            onClickButton()
+        }
     }
 
     override fun onDestroyView() {
