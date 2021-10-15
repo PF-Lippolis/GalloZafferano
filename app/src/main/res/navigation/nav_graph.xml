@@ -46,7 +46,9 @@
         android:label="fragment_adder_recipe"
         tools:layout="@layout/fragment_adder_recipe" >
         <action
-            android:id="@+id/action_adderRecipeFragment_to_listFragment"
-            app:destination="@id/listFragment" />
+            android:id="@+id/action_adderRecipeFragment_to_waitingFragment"
+            app:destination="@id/waitingFragment"
+            app:popUpTo="@id/adderRecipeFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
