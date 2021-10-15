@@ -54,5 +54,9 @@
         android:id="@+id/adderRecipeFragment"
         android:name="com.roostersoft.gallozafferano.AdderRecipeFragment"
         android:label="fragment_adder_recipe"
-        tools:layout="@layout/fragment_adder_recipe" />
+        tools:layout="@layout/fragment_adder_recipe" >
+        <action
+            android:id="@+id/action_adderRecipeFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
 </navigation>
