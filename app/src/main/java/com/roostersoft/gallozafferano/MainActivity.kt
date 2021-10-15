@@ -14,19 +14,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //logout button in toolbar
         var logout: ImageButton = findViewById(R.id.logout)
         logout.setOnClickListener {
-            //TODO() inserire dialog
             MaterialAlertDialogBuilder(this)
                 .setTitle("Logout")
                 .setMessage("Sicuro di voler uscire?")
                 .setPositiveButton("Si", {dialog, which->
                     val intent = Intent(this,LoginActivity::class.java)
+                    dialog.dismiss()
                     startActivity(intent)
-                    dialog.dismiss()})
+                    finish()
+                    })
                 .setNegativeButton("No", {dialog, which -> dialog.dismiss()})
                 .show()
         }
-
     }
 }
