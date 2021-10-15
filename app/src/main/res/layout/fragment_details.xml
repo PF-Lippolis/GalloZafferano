@@ -26,8 +26,12 @@
         app:layout_constraintTop_toBottomOf="@id/recipe_details_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:background="#11D8D4D4"
         android:textStyle="bold"
-        tools:text="@tools:sample/lorem"/>
+        android:paddingStart="8dp"
+        android:paddingTop="4dp"
+        tools:text="@tools:sample/lorem"
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/recipe_details_description"
@@ -36,7 +40,10 @@
         app:layout_constraintTop_toBottomOf="@id/recipe_details_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:background="#11D8D4D4"
         android:paddingTop="5dp"
+        android:paddingStart="8dp"
+        android:textColor="@color/black"
         tools:text="@tools:sample/lorem/random"
         tools:maxLines="15"></TextView>
 
