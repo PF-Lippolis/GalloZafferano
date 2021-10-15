@@ -38,12 +38,12 @@ class ListFragment : Fragment() {
             if(list == null) {
                 binding.layoutError.visibility = View.VISIBLE
                 binding.layoutList.visibility = View.GONE
-                messaggioErrore = "Errore 404 /n :( /n riprovare più tardi"
+                messaggioErrore = "Errore 404 \n :( \n riprovare più tardi"
                 binding.txtListError.text = messaggioErrore
             } else if(list.isEmpty()) {
                 binding.layoutError.visibility = View.VISIBLE
                 binding.layoutList.visibility = View.GONE
-                messaggioErrore = "Ricettario vuoto. /n Non avrai mica cancellato tutto?"
+                messaggioErrore = "Ricettario vuoto. \nNon avrai mica cancellato tutto?"
                 binding.txtListError.text = messaggioErrore
             } else {
                 binding.layoutError.visibility = View.GONE
