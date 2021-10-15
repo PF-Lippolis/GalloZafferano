@@ -33,15 +33,28 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        var messaggioErrore:String
         viewModel.recipes.observe(viewLifecycleOwner) { list ->
             if(list == null) {
-                //TODO()
+                binding.layoutError.visibility = View.VISIBLE
+                binding.layoutList.visibility = View.GONE
+                messaggioErrore = "Errore 404 /n :( /n riprovare più tardi"
+                binding.txtListError.text = messaggioErrore
             } else if(list.isEmpty()) {
-                //TODO()
+                binding.layoutError.visibility = View.VISIBLE
+                binding.layoutList.visibility = View.GONE
+                messaggioErrore = "Ricettario vuoto. /n Non avrai mica cancellato tutto?"
+                binding.txtListError.text = messaggioErrore
             } else {
+                binding.layoutError.visibility = View.GONE
+                binding.layoutList.visibility = View.VISIBLE
+                //We set the adapter to the recyclerview
                 binding.listFragmentRecipesList.adapter = RecipeAdapter(
+                    //The first string represents the title of the recycleview
                     getString(R.string.welcome_back, args.name),
+                    //The second argument is the list of recipes to show
                     list) {
+                    //This lambda is the element onclick listener, "it" is the recipe clicked
                     val action = ListFragmentDirections.actionListFragmentToDetailsFragment(it)
                     findNavController().navigate(action)
                 }
