@@ -1,28 +1,59 @@
 package com.roostersoft.gallozafferano.viewModel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.roostersoft.gallozafferano.model.RecipeWithId
 import com.roostersoft.gallozafferano.model.RecipeWithIdAndImage
+import com.roostersoft.gallozafferano.network.ApiManager
+import com.roostersoft.gallozafferano.service.RecipeService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class RecipeViewModel: ViewModel() {
+
+    private val TAG = RecipeViewModel::class.java.simpleName
+
+    private val recipeService = ApiManager.recipeService
 
     private val _recipes = MutableLiveData<List<RecipeWithIdAndImage>>()
     val recipes: LiveData<List<RecipeWithIdAndImage>>
         get() = _recipes
     init {
-        _recipes.postValue(listOf(
-            RecipeWithIdAndImage(RecipeWithId("0000", "Carbonara", "Pasta condita con tuorlo d'uovo e guanciale")),
-            RecipeWithIdAndImage(RecipeWithId("0001", "Pasta alla gricia", "Pasta preparata con pasta, pecorino, pepe (ingredienti della pasta cacio e pepe), guanciale.")),
-            RecipeWithIdAndImage(RecipeWithId("0002", "Risotto alla crema di scampi", "Risotto preparato con scampi freschi del mediterraneo e prezzemolino fresco")),
-            RecipeWithIdAndImage(RecipeWithId("0003", "Pollo arrosto", "Pollo arrostito lentamente al forno, aggiungi rosmarino prima della cottura per quel tocco in più")),
-            RecipeWithIdAndImage(RecipeWithId("0004", "Filetto al pepe verde", "Filetto di manzo insaporito al pepe verde con cremina gustosa")),
-            RecipeWithIdAndImage(RecipeWithId("0005", "Margherita", "Pizza semplice: pomodoro e mozzarella. Aggiungete del basilico per quel tocco in più")),
-            RecipeWithIdAndImage(RecipeWithId("0006", "Millefoglie", "Dolce con vari strati di pasta sfoglia farciti con crema")),
-            RecipeWithIdAndImage(RecipeWithId("0007", "Torta Sacher", "Torta al cioccolato farcita con confettura di albicocche")),
-            RecipeWithIdAndImage(RecipeWithId("0000", "Carbonara due", "come la carbonara ma molto più ricca, usate due uova")),
-            ))
+        fetchRecipes()
     }
 
+    fun fetchRecipes(){
+
+        recipeService.getRecipes().enqueue(object : Callback<List<RecipeWithId>> {
+            override fun onResponse(call: Call<List<RecipeWithId>>, response: Response<List<RecipeWithId>>) {
+                if(response.isSuccessful){
+                    val recipesNoImage = response.body()
+                    recipesNoImage?.let {
+                        val tempList  = mutableListOf<RecipeWithIdAndImage>()
+                        for(recipe in recipesNoImage) {
+                            tempList.add(RecipeWithIdAndImage(recipe))
+                        }
+                        _recipes.postValue(tempList)
+                        Log.d(TAG, "SUCCESS")
+                    } ?: run {
+                        Log.d(TAG, "Request was successful but recipes were null")
+                        _recipes.postValue(null)
+                    }
+
+                }else{
+                    Log.d(TAG, "Error: ${response.code()} body: ${response.errorBody()}")
+                    _recipes.postValue(null)
+                }
+            }
+
+            override fun onFailure(call: Call<List<RecipeWithId>>, t: Throwable) {
+                Log.d(TAG, t.localizedMessage ?: "Couldn't retrieve error message")
+                _recipes.postValue(null)
+            }
+
+        })
+    }
 }
