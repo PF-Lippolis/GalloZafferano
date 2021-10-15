@@ -39,6 +39,11 @@
         <argument
             android:name="recipe"
             app:argType="com.roostersoft.gallozafferano.model.RecipeWithIdAndImage" />
+        <action
+            android:id="@+id/action_detailsFragment_to_waitingFragment"
+            app:destination="@id/waitingFragment"
+            app:popUpTo="@id/detailsFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/adderRecipeFragment"
