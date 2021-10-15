@@ -28,6 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:background="#11D8D4D4"
         android:textStyle="bold"
+        android:textSize="22dp"
         android:paddingStart="8dp"
         android:paddingTop="4dp"
         tools:text="@tools:sample/lorem"
@@ -44,9 +45,37 @@
         android:paddingTop="5dp"
         android:paddingStart="8dp"
         android:textColor="@color/black"
+        android:textSize="16dp"
         tools:text="@tools:sample/lorem/random"
-        tools:maxLines="15"></TextView>
+        tools:maxLines="10"></TextView>
 
+    <ImageButton
+        android:id="@+id/icon_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="#11D8D4D4"
+        android:src="@drawable/ic_baseline_delete_forever_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintVertical_bias="0.276"></ImageButton>
 
+    <TextView
+        android:id="@+id/text_elimina_ricetta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Elimina ricetta"
+        android:textSize="16dp"
+        android:textStyle="italic"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/icon_delete"
+        app:layout_constraintVertical_bias="0.0">
 
+    </TextView>
 </androidx.constraintlayout.widget.ConstraintLayout>
