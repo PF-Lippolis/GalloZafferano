@@ -24,9 +24,13 @@
         android:id="@+id/username"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="40dp"
         android:background="#1E000000"
-        android:hint="   Username"
+        android:hint="Username"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="20dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#80FFFFFF"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -39,7 +43,11 @@
         android:layout_height="50dp"
         android:layout_marginTop="32dp"
         android:background="#1E000000"
-        android:hint="   Password"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:paddingLeft="20dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#80FFFFFF"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -50,9 +58,14 @@
         android:id="@+id/button_accedi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:backgroundTint="#1E000000"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#0D000000"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
         android:text="@string/tasto_accedi"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="206dp" />
+        app:layout_constraintGuide_begin="162dp" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -74,6 +87,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.509"
         app:srcCompat="@drawable/banner_gallo" />
 
 
