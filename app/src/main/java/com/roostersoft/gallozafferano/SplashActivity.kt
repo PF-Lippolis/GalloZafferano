@@ -25,6 +25,6 @@ class SplashActivity : AppCompatActivity() {
             // Delay per vedere meglio lo splash
             startActivity(intent)
             finish()
-        }, 2000)
+        }, 1000)
     }
 }
