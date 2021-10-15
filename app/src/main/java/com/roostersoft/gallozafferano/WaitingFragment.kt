@@ -35,14 +35,12 @@ class WaitingFragment : Fragment() {
 
         viewModel.recipes.observe(viewLifecycleOwner){
             val action:NavDirections
-            if (it==null || it.isEmpty()){
-                action = WaitingFragmentDirections.actionWaitingFragmentToErrorFragment()
-            }else{
-                var pref = view.context.getSharedPreferences("user", Context.MODE_PRIVATE)
-                val name = pref.getString("user", null)?:"utente"
-                action = WaitingFragmentDirections.actionWaitingFragmentToListFragment(name)
 
-            }
+            var pref = view.context.getSharedPreferences("user", Context.MODE_PRIVATE)
+            val name = pref.getString("user", null)?:"utente"
+            action = WaitingFragmentDirections.actionWaitingFragmentToListFragment(name)
+
+
             view.findNavController().navigate(action)
         }
     }
