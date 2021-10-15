@@ -4,10 +4,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.roostersoft.gallozafferano.model.Recipe
 import com.roostersoft.gallozafferano.model.RecipeWithId
 import com.roostersoft.gallozafferano.model.RecipeWithIdAndImage
 import com.roostersoft.gallozafferano.network.ApiManager
-import com.roostersoft.gallozafferano.service.RecipeService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,12 +21,14 @@ class RecipeViewModel: ViewModel() {
     private val _recipes = MutableLiveData<List<RecipeWithIdAndImage>>()
     val recipes: LiveData<List<RecipeWithIdAndImage>>
         get() = _recipes
+
+    private val modificationResponse: MutableLiveData<Pair<Boolean, String>?> = MutableLiveData(null)
+
     init {
         fetchRecipes()
     }
 
     fun fetchRecipes(){
-
         recipeService.getRecipes().enqueue(object : Callback<List<RecipeWithId>> {
             override fun onResponse(call: Call<List<RecipeWithId>>, response: Response<List<RecipeWithId>>) {
                 if(response.isSuccessful){
@@ -42,7 +44,6 @@ class RecipeViewModel: ViewModel() {
                         Log.d(TAG, "Request was successful but recipes were null")
                         _recipes.postValue(null)
                     }
-
                 }else{
                     Log.d(TAG, "Error: ${response.code()} body: ${response.errorBody()}")
                     _recipes.postValue(null)
@@ -52,6 +53,43 @@ class RecipeViewModel: ViewModel() {
             override fun onFailure(call: Call<List<RecipeWithId>>, t: Throwable) {
                 Log.d(TAG, t.localizedMessage ?: "Couldn't retrieve error message")
                 _recipes.postValue(null)
+            }
+
+        })
+    }
+
+    fun addRecipe(recipe: Recipe) {
+        recipeService.postRecipe(recipe).enqueue(object: Callback<RecipeWithId> {
+            override fun onResponse(call: Call<RecipeWithId>, response: Response<RecipeWithId>) {
+                if(response.isSuccessful) {
+                    fetchRecipes()
+                    modificationResponse.postValue(true to "Success!")
+                    Log.d(TAG, "SUCCESS")
+                } else {
+                    modificationResponse.postValue(false to "Couldn't add the recipe")
+                }
+            }
+            override fun onFailure(call: Call<RecipeWithId>, t: Throwable) {
+                modificationResponse.postValue(false to "Couldn't connect to the server")
+            }
+
+        })
+    }
+
+    fun deleteRecipe(recipe: RecipeWithIdAndImage) {
+        recipeService.deleteRecipe(recipe._id).enqueue(object: Callback<RecipeWithId> {
+            override fun onResponse(call: Call<RecipeWithId>, response: Response<RecipeWithId>) {
+                if(response.isSuccessful) {
+                    fetchRecipes()
+                    modificationResponse.postValue(true to "Success!")
+                    Log.d(TAG, "SUCCESS")
+                } else {
+                    modificationResponse.postValue(false to "Couldn't delete the recipe")
+                }
+            }
+
+            override fun onFailure(call: Call<RecipeWithId>, t: Throwable) {
+                modificationResponse.postValue(false to "Couldn't connect to the server")
             }
 
         })
