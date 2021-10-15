@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.roostersoft.gallozafferano.adapter.RecipeAdapter
 import com.roostersoft.gallozafferano.databinding.FragmentListBinding
+import com.roostersoft.gallozafferano.viewModel.RecipeViewModel
 
 class ListFragment : Fragment() {
 
