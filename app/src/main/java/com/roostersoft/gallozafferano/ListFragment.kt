@@ -34,11 +34,17 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.recipes.observe(viewLifecycleOwner) { list ->
-            binding.listFragmentRecipesList.adapter = RecipeAdapter(
-                getString(R.string.welcome_back, args.name),
-                list) {
-                val action = ListFragmentDirections.actionListFragmentToDetailsFragment(it)
-                findNavController().navigate(action)
+            if(list == null) {
+                //TODO()
+            } else if(list.isEmpty()) {
+                //TODO()
+            } else {
+                binding.listFragmentRecipesList.adapter = RecipeAdapter(
+                    getString(R.string.welcome_back, args.name),
+                    list) {
+                    val action = ListFragmentDirections.actionListFragmentToDetailsFragment(it)
+                    findNavController().navigate(action)
+                }
             }
         }
     }
