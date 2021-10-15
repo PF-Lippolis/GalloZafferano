@@ -26,7 +26,7 @@ data class RecipeWithIdAndImage(val imageUrl: String, val _id: String, val title
         fun nextImg(): String {
             val urls = listOf(
                 "https://www.informacibo.it/wp-content/uploads/2018/04/carbonara.jpg",
-                "http://cdn.cook.stbm.it/thumbnails/ricette/1/1259/hd750x421.jpg",
+                "https://blog.giallozafferano.it/inventaricette/wp-content/uploads/2019/10/pasta-gricia-vid.jpg",
                 "https://www.ricetteperbimby.it/foto-ricette/risotto-alla-crema-di-scampi-bimby.jpg",
                 "https://primochef.it/wp-content/uploads/2019/03/SH_pollo_arrosto.jpg.webp",
                 "https://www.giallozafferano.it/images/184-18454/Filetto-al-pepe-verde_650x433_wm.jpg",
