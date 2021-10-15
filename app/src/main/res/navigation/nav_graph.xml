@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_listFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_adderRecipeFragment"
+            app:destination="@id/adderRecipeFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
@@ -47,4 +50,9 @@
             android:name="recipe"
             app:argType="com.roostersoft.gallozafferano.model.RecipeWithIdAndImage" />
     </fragment>
+    <fragment
+        android:id="@+id/adderRecipeFragment"
+        android:name="com.roostersoft.gallozafferano.AdderRecipeFragment"
+        android:label="fragment_adder_recipe"
+        tools:layout="@layout/fragment_adder_recipe" />
 </navigation>
