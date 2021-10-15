@@ -14,6 +14,6 @@ class ApiManager {
             .build()
 
 
-        val userService = retrofit.create(RecipeService::class.java)
+        val recipeService = retrofit.create(RecipeService::class.java)
     }
 }
