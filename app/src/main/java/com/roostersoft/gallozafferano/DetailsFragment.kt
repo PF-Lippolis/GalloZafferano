@@ -5,13 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.navArgs
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.roostersoft.gallozafferano.databinding.FragmentDetailsBinding
+import com.roostersoft.gallozafferano.viewModel.RecipeViewModel
 
 class DetailsFragment : Fragment() {
-
+    private val viewModel:RecipeViewModel by activityViewModels()
     private var _binding: FragmentDetailsBinding? = null
     // This property is only valid between onCreateView and
 // onDestroyView.
@@ -24,8 +28,31 @@ class DetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
+        onClickButton()
         return binding.root
     }
+
+    private fun onClickButton() {
+        binding.iconDelete.setOnClickListener{
+            showCustomDialog()
+        }
+    }
+
+    private fun showCustomDialog() {
+        MaterialAlertDialogBuilder(requireActivity())
+            .setTitle("Attenzione")
+            .setMessage("Eliminare definitivamente la ricetta?")
+            .setNegativeButton("No",null)
+            .setPositiveButton("Si"){
+                _, _ ->
+                deleteRecipe()
+            }
+    }
+
+    private fun deleteRecipe() {
+        viewModel.deleteRecipe(args.recipe)
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
