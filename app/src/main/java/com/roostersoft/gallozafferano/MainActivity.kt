@@ -13,6 +13,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val userSharedPref = getSharedPreferences(
+            "user", Context.MODE_PRIVATE)
 
         //logout button in toolbar
         var logout: ImageButton = findViewById(R.id.logout)
@@ -23,6 +25,7 @@ class MainActivity : AppCompatActivity() {
                 .setPositiveButton("Si", {dialog, which->
                     val intent = Intent(this,LoginActivity::class.java)
                     dialog.dismiss()
+                    userSharedPref.edit().putString("user", null).apply()
                     startActivity(intent)
                     finish()
                     })
