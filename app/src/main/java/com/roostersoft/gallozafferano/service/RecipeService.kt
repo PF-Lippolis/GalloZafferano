@@ -12,8 +12,8 @@ interface RecipeService {
 
     @POST("recipes")
     @FormUrlEncoded
-    fun postRecipe(@Body recipe: Recipe): Call<Recipe>
+    fun postRecipe(@Body recipe: Recipe): Call<RecipeWithId>
 
     @DELETE("recipes/{id}")
-    fun deleteRecipe(@Path("id") id: String): Call<Recipe>
+    fun deleteRecipe(@Path("id") id: String): Call<RecipeWithId>
 }
