@@ -47,7 +47,7 @@ class DetailsFragment : Fragment() {
             .setPositiveButton("Si"){
                 _, _ ->
                 deleteRecipe()
-            }
+            }.show()
     }
 
     private fun deleteRecipe() {
