@@ -11,21 +11,11 @@
         android:label="fragment_waiting"
         tools:layout="@layout/fragment_waiting" >
         <action
-            android:id="@+id/action_waitingFragment_to_errorFragment"
-            app:destination="@id/errorFragment"
-            app:popUpTo="@id/waitingFragment"
-            app:popUpToInclusive="true"/>
-        <action
             android:id="@+id/action_waitingFragment_to_listFragment"
             app:destination="@id/listFragment"
             app:popUpTo="@id/waitingFragment"
             app:popUpToInclusive="true"/>
     </fragment>
-    <fragment
-        android:id="@+id/errorFragment"
-        android:name="com.roostersoft.gallozafferano.ErrorFragment"
-        android:label="fragment_error"
-        tools:layout="@layout/fragment_error" />
     <fragment
         android:id="@+id/listFragment"
         android:name="com.roostersoft.gallozafferano.ListFragment"
@@ -37,6 +27,9 @@
         <action
             android:id="@+id/action_listFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_adderRecipeFragment"
+            app:destination="@id/adderRecipeFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
@@ -46,5 +39,14 @@
         <argument
             android:name="recipe"
             app:argType="com.roostersoft.gallozafferano.model.RecipeWithIdAndImage" />
+    </fragment>
+    <fragment
+        android:id="@+id/adderRecipeFragment"
+        android:name="com.roostersoft.gallozafferano.AdderRecipeFragment"
+        android:label="fragment_adder_recipe"
+        tools:layout="@layout/fragment_adder_recipe" >
+        <action
+            android:id="@+id/action_adderRecipeFragment_to_listFragment"
+            app:destination="@id/listFragment" />
     </fragment>
 </navigation>
