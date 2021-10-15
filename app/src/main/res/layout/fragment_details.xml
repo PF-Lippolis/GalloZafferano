@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".DetailsFragment"
-    android:background="@color/rosso_tenue"
+    android:background="#20000000"
     >
 
     <ImageView
@@ -26,7 +26,7 @@
         app:layout_constraintTop_toBottomOf="@id/recipe_details_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        
+        android:textStyle="bold"
         tools:text="@tools:sample/lorem"/>
 
     <TextView
@@ -36,7 +36,7 @@
         app:layout_constraintTop_toBottomOf="@id/recipe_details_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
+        android:paddingTop="5dp"
         tools:text="@tools:sample/lorem/random"
         tools:maxLines="15"></TextView>
 
