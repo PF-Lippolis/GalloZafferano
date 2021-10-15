@@ -34,6 +34,13 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var messaggioErrore:String
+
+        //floating action button
+        binding.fabListToAdder.setOnClickListener {
+            val action = ListFragmentDirections.actionListFragmentToAdderRecipeFragment()
+            findNavController().navigate(action)
+        }
+
         viewModel.recipes.observe(viewLifecycleOwner) { list ->
             if(list == null) {
                 binding.layoutError.visibility = View.VISIBLE
