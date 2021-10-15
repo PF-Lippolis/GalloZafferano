@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.GalloZafferano" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/rosso_pollo_acceso</item>
         <item name="colorPrimaryVariant">@color/rosso_pollo</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -16,7 +16,7 @@
     <style name="Splash_theme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowBackground">@drawable/background_splash</item>
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/rosso_pollo_acceso</item>
         <item name="colorPrimaryVariant">@color/rosso_pollo</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
