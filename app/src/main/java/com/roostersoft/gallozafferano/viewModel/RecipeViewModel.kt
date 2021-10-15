@@ -22,7 +22,7 @@ class RecipeViewModel: ViewModel() {
     val recipes: LiveData<List<RecipeWithIdAndImage>>
         get() = _recipes
 
-    private val modificationResponse: MutableLiveData<Pair<Boolean, String>?> = MutableLiveData(null)
+    val modificationResponse: MutableLiveData<Pair<Boolean, String>?> = MutableLiveData(null)
 
     init {
         fetchRecipes()
@@ -63,14 +63,14 @@ class RecipeViewModel: ViewModel() {
             override fun onResponse(call: Call<RecipeWithId>, response: Response<RecipeWithId>) {
                 if(response.isSuccessful) {
                     fetchRecipes()
-                    modificationResponse.postValue(true to "Success!")
+                    modificationResponse.postValue(true to "Successo! Ricetta aggiunta")
                     Log.d(TAG, "SUCCESS")
                 } else {
-                    modificationResponse.postValue(false to "Couldn't add the recipe")
+                    modificationResponse.postValue(false to "Non è stato possibile aggiungere la ricetta")
                 }
             }
             override fun onFailure(call: Call<RecipeWithId>, t: Throwable) {
-                modificationResponse.postValue(false to "Couldn't connect to the server")
+                modificationResponse.postValue(false to "La connessione al server è fallita")
             }
 
         })
@@ -81,15 +81,15 @@ class RecipeViewModel: ViewModel() {
             override fun onResponse(call: Call<RecipeWithId>, response: Response<RecipeWithId>) {
                 if(response.isSuccessful) {
                     fetchRecipes()
-                    modificationResponse.postValue(true to "Success!")
+                    modificationResponse.postValue(true to "Successo! Ricetta cancellata correttamente")
                     Log.d(TAG, "SUCCESS")
                 } else {
-                    modificationResponse.postValue(false to "Couldn't delete the recipe")
+                    modificationResponse.postValue(false to "Non ho potuto cancellare la ricetta")
                 }
             }
 
             override fun onFailure(call: Call<RecipeWithId>, t: Throwable) {
-                modificationResponse.postValue(false to "Couldn't connect to the server")
+                modificationResponse.postValue(false to "La connessione al server è fallita")
             }
 
         })

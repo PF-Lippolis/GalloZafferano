@@ -5,55 +5,59 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.roostersoft.gallozafferano.databinding.FragmentAdderRecipeBinding
+import com.roostersoft.gallozafferano.databinding.FragmentListBinding
+import com.roostersoft.gallozafferano.model.Recipe
+import com.roostersoft.gallozafferano.viewModel.RecipeViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [AdderRecipeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AdderRecipeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentAdderRecipeBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
+    private val args: ListFragmentArgs by navArgs()
+    private val viewModel: RecipeViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_adder_recipe, container, false)
+        _binding = FragmentAdderRecipeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AdderRecipeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AdderRecipeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.modificationResponse.observe(viewLifecycleOwner) {
+            //If it is not null, a response was received.
+            it?.let {
+                //If the boolean is true, the request was successful, we navigate to the list
+                if(it.first) {
+                    Toast.makeText(activity, it.second, Toast.LENGTH_LONG).show()
+                    val action = AdderRecipeFragmentDirections.actionAdderRecipeFragmentToWaitingFragment()
+                    findNavController().navigate(action)
+                    viewModel.modificationResponse.postValue(null)
+                } else {
+                    //The boolean is false, we make the user remain on the screen in case they want to retry
+                    Toast.makeText(activity, it.second, Toast.LENGTH_LONG).show()
+                    viewModel.modificationResponse.postValue(null)
                 }
             }
+        }
+
+
+        binding.btnAdderRecipe.setOnClickListener {
+            val title = binding.txtInputAdderRecipeTitle.text.toString()
+            val body = binding.txtInputAdderRecipeComment.text.toString()
+            val recipe = Recipe(title, body)
+            viewModel.addRecipe(recipe)
+        }
     }
 }
